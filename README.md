@@ -1,9 +1,9 @@
-### MSCI 599 Marine Data Science with R
+### MSCI 758 Marine Data Science with R
 ### Unit 2: Climate
 
-Course GitHub site: https://github.com/MSCI-599
+Course GitHub site: https://github.com/MSCI-758
 
-Unit 2 GitHub repository: https://github.com/MSCI-599/unit_2_climate
+Unit 2 GitHub repository: https://github.com/MSCI-758/unit_2_climate
 
 This unit will cover learning to program in base R. We'll explore data reading and writing, plotting, and simple data manipulation. We'll also go over boolean logic, if/else statements, loops and user defined functions.
 
@@ -15,15 +15,11 @@ This unit will cover learning to program in base R. We'll explore data reading a
 
 ***
 
-#### Homework: HW_2_climate Due: 2/24/2021
+#### Homework: 
 
-https://classroom.github.com/a/WrxXVKkk
+-  HW_2_sea_level_rise - Assigned: 2/1/2022, Due: 2/10/2022
 
--  HW_2a_sea_level_rise - Assigned: 2/8/2021, Due: 2/24/2021
-
--  HW_2b_ice_core_co2 - Assigned: 2/17/2021, Due: 2/24/2021
-
-(HW_2_climate is HW_2a and HW_2b combined in the same repo called `HW_2_climate`)
+-  HW_3_ice_core_co2 - Assigned: 2/10/2022, Due: 2/17/2022
 
 ***
 
