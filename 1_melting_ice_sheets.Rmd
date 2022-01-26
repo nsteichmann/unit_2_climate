@@ -29,11 +29,15 @@ The Antarctic and Greenland ice sheet mass loss data is collected by NASA's GRAC
 
 ![](doc/grace_satellites.jpg){width=50%}
 
+Check out this "Crazy Engineering: Microwaves and Lasers" video to learn more:
+
+<https://www.youtube.com/watch?v=hsdjssgbZoU&t=201s>
+
 #### Agenda:
 
+- Construct the necessary R code to import this data set as a `data.frame` object.
 - Examine the data set: what are the columns and units? Where do the numbers come from? 
 - What is the uncertainty in measurement? Resolution of the data? Interpretation of missing values?
-- Construct the necessary R code to import this data set as a `data.frame` object.
 - Plot the data and describe the trends you observe.
 
 Go to the website and register yourself as a NASA Earthdata user. From there you can click on the data and download it. In your web browser, go to `File -> Save page as -> and save it as a text file` in your Rproj folder in a directory called `/data`.
@@ -66,13 +70,13 @@ plot(mass_Gt ~ decimal_date, data=ant_ice_loss, ylab="Antarctica Mass Loss (Gt)"
 plot(mass_Gt ~ decimal_date, data=grn_ice_loss, ylab="Greenland Mass Loss (Gt)")
 
 # Plot both together as lines
-plot(mass_Gt ~ decimal_date, data=ant_ice_loss, ylab="Ice Sheet Mass Loss (Gt)", type='l') +
+plot(mass_Gt ~ decimal_date, data=ant_ice_loss, ylab="Ice Sheet Mass Loss (Gt)", type='l') 
 lines(mass_Gt ~ decimal_date, data=grn_ice_loss, col='red') 
 ```
 
 Note how we can use the `+` to link multiple plots together to print to the same window.
 
-The plot window is sized to capture the range of the data originally called, which in this case was the Antarctica ice loss. When we added the Greendland mass loss data to the plot, it extended outside the bounds of the plot window. Let's manually set the limits on the y-axis so we can see the whole Greenland time series.
+The plot window is sized to capture the range of the data originally called, which in this case was the Antarctica ice loss. When we added the Greenland mass loss data to the plot, it extended outside the bounds of the plot window. Let's manually set the limits on the y-axis so we can see the whole Greenland time series.
 
 ```{r}
 plot(mass_Gt ~ decimal_date, data=ant_ice_loss, ylab="Antarctica Mass Loss (Gt)", type='l', ylim=range(grn_ice_loss$mass_Gt)) +
@@ -89,6 +93,7 @@ data_break
 #Add NA data point to the Antarctica ice trends data frame
 ant_ice_loss_with_NA = rbind(ant_ice_loss, data_break) # Merge ant_ice_loss data frame with our NA point
 tail(ant_ice_loss_with_NA) # Our NA value in 2018 is now the last row of our data frame
+order(ant_ice_loss_with_NA$decimal_date) # Use order() to list the indices of the data after its sorted from smallest to biggest
 ant_ice_loss_with_NA = ant_ice_loss_with_NA[order(ant_ice_loss_with_NA$decimal_date),] # Reorder the data frame, sorting by date
 
 #Repeat with Greenland data.frame
@@ -99,7 +104,7 @@ plot(mass_Gt ~ decimal_date, data=ant_ice_loss_with_NA, ylab="Antarctica Mass Lo
 lines(mass_Gt ~ decimal_date, data=grn_ice_loss_with_NA, type='l', col='red') 
 ```
 
-NASA provided sigma, or one standard deviation, uncertainty data, which represents 68% of uncertainty. 2 X sigma represents 95% uncertainty. We can plot 95% confidence intervals around the data by adding and subtracting 2*sigma from the mass loss estimates
+NASA provided sigma, or one standard deviation, uncertainty data, which represents 68% of uncertainty. (Note in the header, they call it "1-sigma", but this doesn't mean "one minus the standard deviation", it means "one standard deviation"). However, in science, sometimes we show errors as "2-sigma", where 2 X sigma represents 95% uncertainty. We can plot 95% confidence intervals around the data by adding and subtracting 2*sigma from the mass loss estimates
 
 ```{r}
 head(ant_ice_loss_with_NA)
@@ -122,7 +127,7 @@ Now we can combine our Antarctic and Greenland time series plots into the same p
 
 ```{r}
 pdf('figures/ice_mass_trends.pdf', width=7, height=5)
-plot(mass_Gt ~ decimal_date, data=ant_ice_loss_with_NA, ylab="Antarctica Mass Loss (Gt)", xlab="Year", type='l', ylim=range(grn_ice_loss_with_NA$mass_Gt, na.rm=TRUE), lwd=2) +
+plot(mass_Gt ~ decimal_date, data=ant_ice_loss_with_NA, ylab="Ice Sheet Mass Loss (Gt)", xlab="Year", type='l', ylim=range(grn_ice_loss_with_NA$mass_Gt, na.rm=TRUE), lwd=2) +
 lines((mass_Gt+2*sigma_Gt) ~ decimal_date, data=ant_ice_loss_with_NA, type='l', lty='dashed') +
 lines((mass_Gt-2*sigma_Gt) ~ decimal_date, data=ant_ice_loss_with_NA, type='l', lty='dashed') +
 lines(mass_Gt ~ decimal_date, data=grn_ice_loss_with_NA, type='l', col='red', lwd=2) +
@@ -148,7 +153,7 @@ barplot(height=c(min(ant_ice_loss$mass_Gt)*(-1), min(grn_ice_loss$mass_Gt)*(-1))
 
 ### Exercise 1.2:
 
-Calculate the average annual ice loss for each ice sheet by dividing the change in ice lost from the beginning to the end of the time series by the total time that passed. Then display the ice loss rates in a bar graph. Save the bar graph into the `figures/` directory in this repo.
+Calculate the average annual ice loss (a.k.a. the annual rate of ice loss) for each ice sheet by dividing the change in ice lost from the beginning to the end of the time series by the total time that passed. Then display the ice loss rates in a bar graph. Save the bar graph into the `figures/` directory in this repo.
 
 ***
 
