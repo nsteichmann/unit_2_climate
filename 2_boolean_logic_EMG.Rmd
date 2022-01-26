@@ -165,7 +165,7 @@ b == c
 a == b & b == c
 ```
 
-We can use a Boolean operator to locate an ocean that has an average depth > 4000m AND an area < 50x10^6 km^2. We can write this test in R with:
+We can use a Boolean operator to locate an ocean that has an average depth > 4000m AND an area < 50x10^6^ km^2^. We can write this test in R with:
 
 ```{r}
 world_oceans$ocean[world_oceans$avg_depth_m > 4000 & world_oceans$area_km2 < 50e6]
@@ -199,7 +199,8 @@ So R supplies the function `is.na()` that can test whether a value is an `NA`.
 ```{r}
 is.na(NA)
 vec <- c(1, 2, 3, NA)
-is.na(vec)
+is.na(vec) # Which elements in vec are NA?
+any(is.na(vec)) # Are there any NA's in vec?
 ```
 
 ***

@@ -370,7 +370,7 @@ b == c
 ## [1]  TRUE  TRUE FALSE
 a == b &amp; b == c
 ## [1]  TRUE  TRUE FALSE</code></pre>
-<p>We can use a Boolean operator to locate an ocean that has an average depth &gt; 4000m AND an area &lt; 50x10^6 km^2. We can write this test in R with:</p>
+<p>We can use a Boolean operator to locate an ocean that has an average depth &gt; 4000m AND an area &lt; 50x10<sup>6</sup> km<sup>2</sup>. We can write this test in R with:</p>
 <pre class="r"><code>world_oceans$ocean[world_oceans$avg_depth_m &gt; 4000 &amp; world_oceans$area_km2 &lt; 50e6]
 ## [1] &quot;Southern&quot;</code></pre>
 <p>Two other useful functions are <code>any</code> and <code>all</code>. The <code>any</code> function takes a vector of logicals and returns <code>TRUE</code> if any of the entries is <code>TRUE</code>. The <code>all</code> function takes a vector of logicals and returns <code>TRUE</code> if all of the entries are <code>TRUE</code>. Here is an example:</p>
