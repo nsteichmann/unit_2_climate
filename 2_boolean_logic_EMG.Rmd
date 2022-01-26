@@ -1,4 +1,5 @@
 ---
+title: "2.2 Boolean logic"
 output: html_document
 ---
 
@@ -134,12 +135,12 @@ Table: Boolean operators
 
 To use a Boolean operator, place it between two _complete_ logical tests. R will execute each logical test and then use the Boolean operator to combine the results into a single `TRUE` or `FALSE`. 
 
-**The most common mistake with Boolean operators**
+### The most common mistake with Boolean operators
   
 It is easy to forget to put a complete test on either side of a Boolean operator. In English, it is efficient to say "Is _x_ greater than two and less than nine?" But in R, you need to write the equivalent of "Is _x_ greater than two and _is x_ less than nine?".  
 
 R will evaluate the expressions on each side of a Boolean operator separately, and then combine the results into a single TRUE or FALSE. If you do not supply a complete test to each side of the operator, R will return an error: 
-![](figures/boolean_mistake.png)
+![](doc/boolean_mistake.png)
 
 Some examples: 
 
